@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Api.BenefitsServices.BenefitsHelper
 {
@@ -14,7 +12,12 @@ namespace Api.BenefitsServices.BenefitsHelper
             {
                 IncludeFields = true,
             };
+            // setup the option to convert strings to enum
+            var stringEnumConverter = new JsonStringEnumConverter();
+            options.Converters.Add(stringEnumConverter);
+            // read in all the json
             string json = File.ReadAllText(fileName);
+            // deserialize the json file into our generic type
             T item = JsonSerializer.Deserialize<T>(json, options)!;
             return item;
         }

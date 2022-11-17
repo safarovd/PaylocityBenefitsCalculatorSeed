@@ -38,7 +38,7 @@ namespace Api.BenefitsServices
             var newEmp = Mapper.Map<Employee>(newEmployee);
             if (!HandleAddingDependent(newEmployee, newEmp))
             {
-                return new AddEmployeeDto();
+                throw new InvalidOperationException("Employee cannot have two household parters of type Spouse or DomesticPartner.");
             }
             // assign the correct ID's to each new added entity
             newEmp.Dependents = ConfigureDependentIds(newEmp.Dependents,
@@ -107,7 +107,8 @@ namespace Api.BenefitsServices
         public bool HandleAddingDependent(AddEmployeeDto newEmployee, Employee employee)
         {
             bool hasPartner = false;
-            int partnerCount = newEmployee.Dependents.Where(dep => dep.Relationship == Relationship.Spouse).Count();
+            int partnerCount = newEmployee.Dependents
+                .Where(dep => dep.Relationship == Relationship.Spouse || dep.Relationship == Relationship.DomesticPartner).Count();
             if (partnerCount == 1)
             {
                 hasPartner = true;

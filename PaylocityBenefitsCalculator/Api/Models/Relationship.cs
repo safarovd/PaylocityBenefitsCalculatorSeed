@@ -1,9 +1,18 @@
+using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+
 namespace Api.Models;
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Relationship
 {
-    None, // 0
-    Spouse, // 1
-    DomesticPartner, // 2
-    Child // 3
+    //[EnumMember(Value = "")]
+    None, 
+    //[EnumMember(Value = "Spouse")]
+    Spouse,
+    //[EnumMember(Value = "DomesticPartner")]
+    DomesticPartner, 
+    //[EnumMember(Value = "Child")]
+    Child
 }
