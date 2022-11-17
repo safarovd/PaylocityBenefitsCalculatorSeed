@@ -1,5 +1,4 @@
 ﻿using Api.BenefitsServices;
-using Api.Dtos.Dependent;
 using Api.Dtos.Employee;
 using Api.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -38,22 +37,25 @@ namespace Api.Controllers
         [SwaggerOperation(Summary = "Add employee")]
         [HttpPost]
         public async Task<ActionResult<ApiResponse<List<AddEmployeeDto>>>> AddEmployee(AddEmployeeDto newEmployee)
-        { 
-            throw new NotImplementedException();
+        {
+            var addedEmployee = _employeeService.AddEmployee(newEmployee);
+            return Ok(addedEmployee);
         }
 
         [SwaggerOperation(Summary = "Update employee")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<ApiResponse<GetEmployeeDto>>> UpdateEmployee(int id, UpdateEmployeeDto updatedEmployee)
+        public async Task<ActionResult<ApiResponse<GetEmployeeDto>>> UpdateEmployee(int id, UpdateEmployeeDto update)
         {
-            throw new NotImplementedException();
+            var updatedEmployee = _employeeService.UpdateEmployee(id, update);
+            return Ok(updatedEmployee);
         }
 
         [SwaggerOperation(Summary = "Delete employee")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<ApiResponse<List<GetEmployeeDto>>>> DeleteEmployee(int id)
         {
-            throw new NotImplementedException();
+            var removedEmployee = _employeeService.DeleteEmployee(id);
+            return Ok(removedEmployee);
         }
     }
 }

@@ -2,7 +2,6 @@ using Api.BenefitsServices;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 // Register interface and classes
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();

@@ -1,7 +1,8 @@
 ﻿namespace Api.Models
 {
-    public class CompanyEmployees
+    public class AllEntities
     {
         public List<Employee> Employees { get; set;}
+        public List<Dependent> Dependents { get; set; }
     }
 }

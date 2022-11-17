@@ -14,9 +14,17 @@ namespace Api.BenefitsServices.BenefitsHelper
             {
                 IncludeFields = true,
             };
-            string openStream = File.ReadAllText(fileName);
-            T item = JsonSerializer.Deserialize<T>(openStream, options)!;
+            string json = File.ReadAllText(fileName);
+            T item = JsonSerializer.Deserialize<T>(json, options)!;
             return item;
+        }
+
+        public T WriteJson<T>(T data, string fileName)
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize<T>(data, options);
+            File.WriteAllText(fileName, json);
+            return data;
         }
     }
 }
