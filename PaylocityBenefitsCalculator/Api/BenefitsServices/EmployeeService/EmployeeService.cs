@@ -10,6 +10,7 @@ namespace Api.BenefitsServices
         private IMockDataBaseService _databaseService;
         public EmployeeService(IMockDataBaseService databaseService) 
         { 
+            // setup the database service to query for data
             _databaseService = databaseService;
         }
 
@@ -59,6 +60,7 @@ namespace Api.BenefitsServices
         public decimal GetEmployeePaycheck(int id)
         {
             var getEmployeeDto = GetEmployee(id);
+            // call the calculator and calculate Employee's paycheck based off their info
             return PaycheckCalculator.CalculatePaycheck(getEmployeeDto);
         }
     }

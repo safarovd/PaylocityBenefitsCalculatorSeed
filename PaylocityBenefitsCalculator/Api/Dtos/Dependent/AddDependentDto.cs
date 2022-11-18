@@ -8,6 +8,7 @@ namespace Api.Dtos.Dependent
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public Relationship Relationship { get; set; }
+        [Required]
         public string? DateOfBirth { get; set; }
     }
 }

@@ -9,6 +9,9 @@ namespace Api.BenefitsServices.DependentService
         IMockDataBaseService _databaseService;
         public DependentService(IMockDataBaseService databaseService)
         {
+            // hook up our Database mock service
+            // Reason: we do this so that if we ever decide to hook up a real database, not 
+            // much refactoring will be needed.
             _databaseService = databaseService;
 
         }

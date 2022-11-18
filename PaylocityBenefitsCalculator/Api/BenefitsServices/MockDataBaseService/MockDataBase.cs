@@ -63,10 +63,12 @@ namespace Api.BenefitsServices.MockDataBaseService
 
         public Dependent QueryDependentById(int id)
         {
+            // if we have queried this dependend before, access their data in O(1) time
             if (_dependentCache.ContainsKey(id))
             {
                 return _dependentCache[id];
             }
+            // Otherwise they are a new entity and we need to manually query. Recache all data just in case.
             else
             {
                 CacheData();
@@ -86,10 +88,12 @@ namespace Api.BenefitsServices.MockDataBaseService
 
         public Employee QueryEmployeeById(int id)
         {
+            // if we have queried this employee before, access their data in O(1) time
             if (_employeeCache.ContainsKey(id))
             {
                 return _employeeCache[id];
             }
+            // Otherwise they are a new entity and we need to manually query. Recache all data just in case.
             else
             {
                 CacheData();
@@ -102,17 +106,22 @@ namespace Api.BenefitsServices.MockDataBaseService
 
         public void InsertEmployee(Employee employee)
         {
+            // make sure all dependents follow requirements
             if (CanAddDependents(employee))
             {
+                // incremenet Employee id
                 employee.Id = MockDataBase._numEmployees++;
                 foreach (Dependent dependent in employee.Dependents)
                 {
                     dependent.Id = MockDataBase._numDependents++;
+                    // map our dependent to an employee
                     dependent.EmployeeId = employee.Id;
+                    // cache new data
                     _dependentCache[dependent.Id] = dependent;
                 }
                 _employeeCache[employee.Id] = employee;
                 CacheData();
+                // write to our backend data
                 _data.Employees.Add(employee);
                 JsonLoader.WriteJson(_data, MockEntitiesPath);
             }
@@ -120,7 +129,7 @@ namespace Api.BenefitsServices.MockDataBaseService
 
         public void UpdateEmployee(int id, UpdateEmployeeDto updatedEmployee)
         {
-            var employee = _data.Employees.Where(emp => emp.Id == id).FirstOrDefault();
+            var employee = QueryEmployeeById(id);
             if (employee == null) throw new InvalidOperationException($"Employee {id} doesn't exist.");
             // update the values
             employee.FirstName = updatedEmployee.FirstName;
@@ -139,10 +148,13 @@ namespace Api.BenefitsServices.MockDataBaseService
             {
                 if (_dependentCache.ContainsKey(dep.Id))
                 {
+                    // clean dependent cache too
                     _dependentCache.Remove(dep.Id);
                 }
             }
+            // clean employee cache
             _employeeCache.Remove(id);
+            // remove employee from backend data
             _data.Employees.Remove(employee);
             // write our updated data to our mock storage
             JsonLoader.WriteJson(_data, MockEntitiesPath);
@@ -151,8 +163,9 @@ namespace Api.BenefitsServices.MockDataBaseService
         public void InsertDependent(Dependent dependent)
         {
             var employee = QueryEmployeeById(dependent.EmployeeId);
-            if (CanAddDependents(employee))
+            if (CanAddDependent(dependent, employee))
             {
+                // set dependent Id and inc our Id counter
                 dependent.Id = MockDataBase._numDependents++;
                 _dependentCache[dependent.Id] = dependent;
                 employee.Dependents.Add(dependent);
@@ -198,7 +211,8 @@ namespace Api.BenefitsServices.MockDataBaseService
                 }    
             }
         }
-
+        // we want to be able to easily cache our entities so that whenever data is updated
+        // we can re-cache and later access it in O(1) time.
         private void CacheData()
         {
             foreach (Employee employee in _data.Employees)
@@ -216,15 +230,30 @@ namespace Api.BenefitsServices.MockDataBaseService
             }
         }
 
+        private bool CanAddDependent(Dependent dependent, Employee employee)
+        {
+            if ((dependent.Relationship == Relationship.Spouse || dependent.Relationship == Relationship.DomesticPartner) && employee.HasPartner)
+            {
+                throw new InvalidOperationException("Error 1: Employee cannot have two household parters of type Spouse or DomesticPartner.");
+            }
+            else if ((dependent.Relationship == Relationship.Spouse || dependent.Relationship == Relationship.DomesticPartner) && !employee.HasPartner) 
+            {
+                employee.HasPartner = true;
+            }
+            return true;
+        }
+
         private bool CanAddDependents(Employee employee)
         {
             foreach (Dependent dep in employee.Dependents)
             {
+                // As per requirements an Employee can only have 1 household partner
                 if ((dep.Relationship == Relationship.Spouse || dep.Relationship == Relationship.DomesticPartner) && employee.HasPartner)
                 {
-                    throw new InvalidOperationException("Employee cannot have two household parters of type Spouse or DomesticPartner.");
+                    throw new InvalidOperationException("Error 2: Employee cannot have two household parters of type Spouse or DomesticPartner.");
                 } else if ((dep.Relationship == Relationship.Spouse || dep.Relationship == Relationship.DomesticPartner) && !employee.HasPartner)
                 {
+                    // set this to true so that we do not add another partner when we add dependents to this employee
                     employee.HasPartner = true;
                 }
             }
