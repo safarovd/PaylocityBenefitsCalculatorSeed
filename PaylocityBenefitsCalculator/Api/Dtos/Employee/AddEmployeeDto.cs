@@ -1,4 +1,5 @@
 ﻿using Api.Dtos.Dependent;
+using System.ComponentModel.DataAnnotations;
 
 namespace Api.Dtos.Employee
 {

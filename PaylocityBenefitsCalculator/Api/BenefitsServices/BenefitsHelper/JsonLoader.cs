@@ -24,8 +24,10 @@ namespace Api.BenefitsServices.BenefitsHelper
 
         public T WriteJson<T>(T data, string fileName)
         {
+            // prettify the json string
             var options = new JsonSerializerOptions { WriteIndented = true };
             string json = JsonSerializer.Serialize<T>(data, options);
+            // write updated data to our Json file
             File.WriteAllText(fileName, json);
             return data;
         }

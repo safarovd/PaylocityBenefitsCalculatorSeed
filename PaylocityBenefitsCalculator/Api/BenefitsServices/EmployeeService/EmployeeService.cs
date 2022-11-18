@@ -1,108 +1,67 @@
-﻿using Api.Dtos.Employee;
+﻿using Api.BenefitsServices.BenefitsHelper;
+using Api.BenefitsServices.MockDataBaseService;
+using Api.Dtos.Employee;
 using Api.Models;
-
 
 namespace Api.BenefitsServices
 {
     public class EmployeeService : BenefitsService, IEmployeeService
     {
-        public EmployeeService() { }
+        private IMockDataBaseService _databaseService;
+        public EmployeeService(IMockDataBaseService databaseService) 
+        { 
+            // setup the database service to query for data
+            _databaseService = databaseService;
+        }
 
         public List<GetEmployeeDto> GetAllEmployees()
         {
             // create a list of GetEmployeeDtos
-            var allEmployees = new List<GetEmployeeDto>();
-            foreach (Employee emp in Data.Employees)
+            var allEmployeeDtos = new List<GetEmployeeDto>();
+            // mock out a database query to all employees
+            var allEmployees = _databaseService.QueryAllEmployees();
+            foreach (Employee emp in allEmployees)
             {
                 // map Employee to GetEmployeeDto
                 var employeeDto = Mapper.Map<GetEmployeeDto>(emp);
-                allEmployees.Add(employeeDto);
+                allEmployeeDtos.Add(employeeDto);
             }
-            return allEmployees;
+            return allEmployeeDtos;
         }
         // Get employee object and map it to a GetEmpoyeeDto, the return
         public GetEmployeeDto? GetEmployee(int id)
         {
-            var employee = Data.Employees.Where(emp => emp.Id == id).FirstOrDefault();
-            if (employee == null)
-            {
-                return new GetEmployeeDto();
-            }
+            var employee = _databaseService.QueryEmployeeById(id);
             var getEmployeeDto = Mapper.Map<GetEmployeeDto>(employee);
             return getEmployeeDto;
         }
-        // reverse map the Dto to the Employee entity, build the dependents and update data, then return the dto
+
         public AddEmployeeDto AddEmployee(AddEmployeeDto newEmployeeDto)
         {
-
-            var newEmp = Mapper.Map<Employee>(newEmployeeDto);
-            // make sure the new Employee does not have more than one partner
-            if (!CanAddDependent(newEmp))
-            {
-                throw new InvalidOperationException("Employee cannot have two household parters of type Spouse or DomesticPartner.");
-            }
-            // assign the correct ID's to each new added entity
-            newEmp.Dependents = ConfigureDependentIds(newEmp.Dependents,
-                                                      (Data.Dependents.Count > 0 ? Data.Dependents.Last().Id : -1));
-            newEmp.Id = (Data.Employees.Count > 0 ? Data.Employees.Last().Id + 1 : 0);
-            Data.Employees.Add(newEmp);
-            JsonLoader.WriteJson(Data, MockEntitiesPath);
+            var newEmployee = Mapper.Map<Employee>(newEmployeeDto);
+            _databaseService.InsertEmployee(newEmployee);
             return newEmployeeDto;
         }
 
-        private ICollection<Dependent> ConfigureDependentIds(ICollection<Dependent> dependents, int latestId)
-        {
-            foreach (Dependent dependent in dependents)
-            {
-                dependent.Id = ++latestId;
-            }
-            return dependents;
-        }
 
-        public GetEmployeeDto UpdateEmployee(int id, UpdateEmployeeDto updatedEmployee)
+        public GetEmployeeDto UpdateEmployee(int id, UpdateEmployeeDto updateEmployeeDto)
         {
-            // access the targeted employee object
-            var employee = Data.Employees.Where(emp => emp.Id == id).FirstOrDefault();
-            // update the values
-            employee.FirstName = updatedEmployee.FirstName; 
-            employee.LastName = updatedEmployee.LastName;
-            employee.Salary = updatedEmployee.Salary;
-            // write our updated data to our mock storage
-            JsonLoader.WriteJson(Data, MockEntitiesPath);
-            // get the updated Dto and return
-            var getEmployeeDto = GetEmployee(id);
-            return getEmployeeDto;
+            _databaseService.UpdateEmployee(id, updateEmployeeDto);
+            return GetEmployee(id);
         }
 
         public GetEmployeeDto DeleteEmployee(int id)
         {
-            var removedEmployee = GetEmployee(id);
-            
-            foreach (Employee emp in Data.Employees.ToList())
-            {
-                if (emp.Id == id)
-                {
-                    CleanUpEmployeeDependents(emp);
-                    Data.Employees.Remove(emp);
-                }
-            }
-            // write our updated data to our mock storage
-            JsonLoader.WriteJson(Data, MockEntitiesPath);
-            return removedEmployee;
+            var getEmployeeDto = GetEmployee(id);
+            _databaseService.DeleteEmployee(id);
+            return getEmployeeDto;
         }
 
-        public void CleanUpEmployeeDependents(Employee employee)
+        public decimal GetEmployeePaycheck(int id)
         {
-            if (employee.Dependents.Count > 0)
-            {
-                foreach(Dependent dep in Data.Dependents.ToList())
-                {
-                    if (employee.Dependents.Contains(dep))
-                    {
-                        Data.Dependents.Remove(dep);
-                    }
-                }
-            }
+            var getEmployeeDto = GetEmployee(id);
+            // call the calculator and calculate Employee's paycheck based off their info
+            return PaycheckCalculator.CalculatePaycheck(getEmployeeDto);
         }
     }
 }

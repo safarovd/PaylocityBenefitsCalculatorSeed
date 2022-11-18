@@ -11,5 +11,6 @@ namespace Api.BenefitsServices
         AddEmployeeDto AddEmployee(AddEmployeeDto employee);
         GetEmployeeDto UpdateEmployee(int id, UpdateEmployeeDto update);
         GetEmployeeDto DeleteEmployee(int id);
+        decimal GetEmployeePaycheck(int id);
     }
 }

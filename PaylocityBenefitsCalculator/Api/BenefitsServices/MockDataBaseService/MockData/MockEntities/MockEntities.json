@@ -1,0 +1,32 @@
+{
+  "Employees": [
+    {
+      "Id": 0,
+      "FirstName": "Daniel",
+      "LastName": "Safarov",
+      "Salary": 150000,
+      "DateOfBirth": "1998-5-31",
+      "Dependents": [
+        {
+          "Id": 0,
+          "FirstName": "Jayden",
+          "LastName": "Chrsitman",
+          "DateOfBirth": "1997-7-20",
+          "Relationship": "Spouse",
+          "EmployeeId": 0,
+          "Employee": null
+        },
+        {
+          "Id": 1,
+          "FirstName": "Minh",
+          "LastName": "Nguyen",
+          "DateOfBirth": "1950-1-11",
+          "Relationship": "None",
+          "EmployeeId": 0,
+          "Employee": null
+        }
+      ],
+      "HasPartner": true
+    }
+  ]
+}
