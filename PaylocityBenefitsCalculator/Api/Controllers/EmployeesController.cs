@@ -35,9 +35,9 @@ namespace Api.Controllers
 
         [SwaggerOperation(Summary = "Get Employee Monthly Paycheck")]
         [HttpGet("{id}/Paycheck")]
-        public async Task<ActionResult<decimal>> GetEmployeeMonthlyPaycheck(int id)
+        public async Task<ActionResult<decimal>> GetEmployeePaycheck(int id)
         {
-            decimal paycheck = _employeeService.GetEmployeeMonthlyPaycheck(id);
+            decimal paycheck = _employeeService.GetEmployeePaycheck(id);
             return Ok(paycheck);
         }
 

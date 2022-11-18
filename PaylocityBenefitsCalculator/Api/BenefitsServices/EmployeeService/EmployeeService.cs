@@ -56,14 +56,14 @@ namespace Api.BenefitsServices
             return getEmployeeDto;
         }
 
-        public decimal GetEmployeeMonthlyPaycheck(int id)
+        public decimal GetEmployeePaycheck(int id)
         {
             var getEmployeeDto = GetEmployee(id);
-            return CalculateMonthlyPaycheck(getEmployeeDto);
+            return CalculatePaycheck(getEmployeeDto);
 
         }
 
-        private decimal CalculateMonthlyPaycheck(GetEmployeeDto getEmployeeDto)
+        private decimal CalculatePaycheck(GetEmployeeDto getEmployeeDto)
         {
             decimal salary = getEmployeeDto.Salary;
             int age = GetEmployeeAge(getEmployeeDto.DateOfBirth);
@@ -76,6 +76,7 @@ namespace Api.BenefitsServices
             paycheck = BaseFee(paycheck);
             // every dependent costs $600 per month for benefits
             paycheck = DependentFee(paycheck, getEmployeeDto);
+            if (paycheck < 0) throw new InvalidOperationException($"Employee {getEmployeeDto.Id} earns peanuts, pay more.");
             return decimal.Round(paycheck, 2, MidpointRounding.AwayFromZero); ;
         }
 
