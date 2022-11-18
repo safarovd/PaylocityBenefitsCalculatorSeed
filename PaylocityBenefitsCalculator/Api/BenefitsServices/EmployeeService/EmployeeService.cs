@@ -69,15 +69,26 @@ namespace Api.BenefitsServices
             int age = GetEmployeeAge(getEmployeeDto.DateOfBirth);
             // If salary is over 80k, incure 2% fee
             salary = SalaryCapFee(salary);
-            var paycheck = ConvertSalaryToPaycheck(salary);
+            var monthlySalary = ConvertSalaryToMonthly(salary);
             // if employye is 50 years or older, deduct $200 per month
-            paycheck = OldAgeFee(age, paycheck);
+            monthlySalary = OldAgeFee(age, monthlySalary);
             // every employee pays a base fee of $1000
-            paycheck = BaseFee(paycheck);
+            monthlySalary = BaseFee(monthlySalary);
             // every dependent costs $600 per month for benefits
-            paycheck = DependentFee(paycheck, getEmployeeDto);
+            monthlySalary = DependentFee(monthlySalary, getEmployeeDto);
+            // convert monthly to actual paycheck
+            var paycheck = ConvertToPaycheck(monthlySalary);
             if (paycheck < 0) throw new InvalidOperationException($"Employee {getEmployeeDto.Id} earns peanuts, pay more.");
             return decimal.Round(paycheck, 2, MidpointRounding.AwayFromZero); ;
+        }
+        private decimal ConvertSalaryToMonthly(decimal salary)
+        {
+            return salary / 12;
+        }
+
+        private decimal ConvertToPaycheck(decimal monthlySalary)
+        {
+            return (monthlySalary * 12) / 26;
         }
 
         private int GetEmployeeAge(string date)
@@ -98,29 +109,23 @@ namespace Api.BenefitsServices
             return salary;
         }
 
-        private decimal ConvertSalaryToPaycheck(decimal salary)
-        {
-            // calc their monthyl paycheck to apply monthly deductions
-            return salary / 26;
-        }
-
-        private decimal OldAgeFee(int age, decimal paycheck)
+        private decimal OldAgeFee(int age, decimal monthlySalary)
         {
             if (age >= 50)
             {
-                return paycheck - 200;
+                return monthlySalary - 200;
             }
-            return paycheck;
+            return monthlySalary;
         }
 
-        private decimal BaseFee(decimal paycheck)
+        private decimal BaseFee(decimal monthlySalary)
         {
-            return paycheck - 1000;
+            return monthlySalary - 1000;
         }
 
-        private decimal DependentFee(decimal paycheck, GetEmployeeDto getEmployeeDto)
+        private decimal DependentFee(decimal monthlySalary, GetEmployeeDto getEmployeeDto)
         {
-            return paycheck - (getEmployeeDto.Dependents.Count * 600);
+            return monthlySalary - (getEmployeeDto.Dependents.Count * 600);
         }
     }
 }

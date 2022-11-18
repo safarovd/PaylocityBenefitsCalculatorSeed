@@ -7,18 +7,24 @@ namespace Api.BenefitsServices.MockDataBaseService
 {
     public class MockDataBase : IMockDataBaseService
     {
+        // hidden from the user, this will act as our table
         private AllEntities _data;
+        // reads/writes to our fake table
         protected JsonLoader JsonLoader;
+        // counters for entity Id's
         protected static int _numEmployees;
         protected static int _numDependents;
+        // caching for our queried entities, speeding up our query process
         private Dictionary<int, Employee> _employeeCache = new Dictionary<int, Employee>();
         private Dictionary<int, Dependent> _dependentCache = new Dictionary<int, Dependent>();
+        // path to data
         protected string MockEntitiesPath = "BenefitsServices\\MockDataBaseService\\MockData\\MockEntities\\MockEntities.json";
         public MockDataBase()
         {
             // Hook up and load in our Employee data
             JsonLoader = new JsonLoader();
             _data = JsonLoader.LoadJson<AllEntities>(MockEntitiesPath);
+            // initialize our session counters
             _numEmployees = _data.Employees.Count == 0 ? 0 : _data.Employees.Last().Id + 1;
             _numDependents = GetLastestDependentId();
         }
@@ -38,6 +44,7 @@ namespace Api.BenefitsServices.MockDataBaseService
 
         public List<Dependent> QueryAllDependents()
         {
+            // simply loop through all employees and store dependents and cache the queried data
             var dependents = new List<Dependent>();
             foreach (Employee employee in _data.Employees)
             {
@@ -49,6 +56,7 @@ namespace Api.BenefitsServices.MockDataBaseService
 
         public List<Employee> QueryAllEmployees()
         {
+            // return all queried employees and cache
             CacheData();
             return _data.Employees;
         }
