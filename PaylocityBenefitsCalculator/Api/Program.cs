@@ -1,5 +1,6 @@
 using Api.BenefitsServices;
 using Api.BenefitsServices.DependentService;
+using Api.BenefitsServices.MockDataBaseService;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Register interfaces and classes for our services
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IDependentService, DependentService>();
+builder.Services.AddScoped<IMockDataBaseService, MockDataBase>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

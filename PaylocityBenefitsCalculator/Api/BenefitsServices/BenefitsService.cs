@@ -9,9 +9,9 @@ namespace Api.BenefitsServices
     public class BenefitsService : IBenefitsService
     {
         protected IMapper Mapper;
-        protected JsonLoader JsonLoader;
-        protected AllEntities Data;
-        protected string MockEntitiesPath = "MockData\\MockEntities\\MockEntities.json";
+        //protected JsonLoader JsonLoader;
+        //protected AllEntities Data;
+        //protected string MockEntitiesPath = "MockData\\MockEntities\\MockEntities.json";
 
         public BenefitsService()
         {
@@ -28,9 +28,6 @@ namespace Api.BenefitsServices
                 cfg.CreateMap<UpdateDependentDto, Dependent>();
             });
             Mapper = new Mapper(config);
-            // Hook up and load in our Employee data
-            JsonLoader = new JsonLoader();
-            Data = JsonLoader.LoadJson<AllEntities>(MockEntitiesPath);
         }
 
         protected bool CanAddDependent(Employee employee)
