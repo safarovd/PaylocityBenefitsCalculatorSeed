@@ -20,7 +20,7 @@ namespace Api.BenefitsServices
             }
             return allEmployees;
         }
-
+        // Get employee object and map it to a GetEmpoyeeDto, the return
         public GetEmployeeDto? GetEmployee(int id)
         {
             var employee = Data.Employees.Where(emp => emp.Id == id).FirstOrDefault();
@@ -31,12 +31,13 @@ namespace Api.BenefitsServices
             var getEmployeeDto = Mapper.Map<GetEmployeeDto>(employee);
             return getEmployeeDto;
         }
-
-        public AddEmployeeDto AddEmployee(AddEmployeeDto newEmployee)
+        // reverse map the Dto to the Employee entity, build the dependents and update data, then return the dto
+        public AddEmployeeDto AddEmployee(AddEmployeeDto newEmployeeDto)
         {
 
-            var newEmp = Mapper.Map<Employee>(newEmployee);
-            if (!HandleAddingDependent(newEmployee, newEmp))
+            var newEmp = Mapper.Map<Employee>(newEmployeeDto);
+            // make sure the new Employee does not have more than one partner
+            if (!CanAddDependent(newEmp))
             {
                 throw new InvalidOperationException("Employee cannot have two household parters of type Spouse or DomesticPartner.");
             }
@@ -46,7 +47,7 @@ namespace Api.BenefitsServices
             newEmp.Id = (Data.Employees.Count > 0 ? Data.Employees.Last().Id + 1 : 0);
             Data.Employees.Add(newEmp);
             JsonLoader.WriteJson(Data, MockEntitiesPath);
-            return newEmployee;
+            return newEmployeeDto;
         }
 
         private ICollection<Dependent> ConfigureDependentIds(ICollection<Dependent> dependents, int latestId)
@@ -102,23 +103,6 @@ namespace Api.BenefitsServices
                     }
                 }
             }
-        }
-
-        public bool HandleAddingDependent(AddEmployeeDto newEmployee, Employee employee)
-        {
-            bool hasPartner = false;
-            int partnerCount = newEmployee.Dependents
-                .Where(dep => dep.Relationship == Relationship.Spouse || dep.Relationship == Relationship.DomesticPartner).Count();
-            if (partnerCount == 1)
-            {
-                hasPartner = true;
-            }
-            else if (partnerCount > 1)
-            {
-                return false;
-            }
-            employee.HasPartner = hasPartner;
-            return true;
         }
     }
 }

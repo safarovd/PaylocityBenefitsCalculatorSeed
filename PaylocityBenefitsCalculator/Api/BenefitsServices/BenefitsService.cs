@@ -25,11 +25,30 @@ namespace Api.BenefitsServices
                 .ForMember(emp => emp.Dependents, opt => opt.MapFrom(addDep => addDep));
                 cfg.CreateMap<UpdateEmployeeDto, GetEmployeeDto>();
                 cfg.CreateMap<UpdateEmployeeDto, Employee>();
+                cfg.CreateMap<UpdateDependentDto, Dependent>();
             });
             Mapper = new Mapper(config);
             // Hook up and load in our Employee data
             JsonLoader = new JsonLoader();
             Data = JsonLoader.LoadJson<AllEntities>(MockEntitiesPath);
         }
+
+        protected bool CanAddDependent(Employee employee)
+        {
+            bool hasPartner = false;
+            int partnerCount = employee.Dependents
+                .Where(dep => dep.Relationship == Relationship.Spouse || dep.Relationship == Relationship.DomesticPartner).Count();
+            if (partnerCount == 1)
+            {
+                hasPartner = true;
+            }
+            else if (partnerCount > 1)
+            {
+                return false;
+            }
+            employee.HasPartner = hasPartner;
+            return true;
+        }
+
     }
 }
