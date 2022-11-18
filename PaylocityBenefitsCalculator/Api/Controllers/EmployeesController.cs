@@ -2,7 +2,6 @@
 using Api.Dtos.Employee;
 using Api.Models;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Api.Controllers
@@ -32,6 +31,14 @@ namespace Api.Controllers
         {
             var allEmployeesDto = _employeeService.GetAllEmployees();
             return Ok(allEmployeesDto);
+        }
+
+        [SwaggerOperation(Summary = "Get Employee Monthly Paycheck")]
+        [HttpGet("{id}/Paycheck")]
+        public async Task<ActionResult<decimal>> GetEmployeeMonthlyPaycheck(int id)
+        {
+            decimal paycheck = _employeeService.GetEmployeeMonthlyPaycheck(id);
+            return Ok(paycheck);
         }
 
         [SwaggerOperation(Summary = "Add employee")]
