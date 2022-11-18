@@ -9,8 +9,8 @@ namespace Api.BenefitsServices.MockDataBaseService
     {
         protected AllEntities Data;
         protected JsonLoader JsonLoader;
-        protected static int _numEmployees = 0;
-        protected static int _numDependents = 0;
+        protected static int _numEmployees;
+        protected static int _numDependents;
         private Dictionary<int, Employee> _employeeCache = new Dictionary<int, Employee>();
         private Dictionary<int, Dependent> _dependentCache = new Dictionary<int, Dependent>();
         protected string MockEntitiesPath = "MockData\\MockEntities\\MockEntities.json";
@@ -19,6 +19,21 @@ namespace Api.BenefitsServices.MockDataBaseService
             // Hook up and load in our Employee data
             JsonLoader = new JsonLoader();
             Data = JsonLoader.LoadJson<AllEntities>(MockEntitiesPath);
+            _numEmployees = Data.Employees.Count == 0 ? 0 : Data.Employees.Last().Id + 1;
+            _numDependents = GetLastestDependentId();
+        }
+
+        private int GetLastestDependentId()
+        {
+            for (int i = Data.Employees.Count - 1; i >= 0; i--)
+            {
+                if (Data.Employees[i].Dependents.Count > 0)
+                {
+                    return Data.Employees[i].Dependents.Last().Id + 1;
+
+                }
+            }
+            return 0;
         }
 
         public List<Dependent> QueryAllDependents()

@@ -26,6 +26,7 @@ namespace Api.BenefitsServices
                 cfg.CreateMap<UpdateEmployeeDto, GetEmployeeDto>();
                 cfg.CreateMap<UpdateEmployeeDto, Employee>();
                 cfg.CreateMap<UpdateDependentDto, Dependent>();
+                cfg.CreateMap<AddDependentWithEmployeeIdDto, Dependent>();
             });
             Mapper = new Mapper(config);
         }

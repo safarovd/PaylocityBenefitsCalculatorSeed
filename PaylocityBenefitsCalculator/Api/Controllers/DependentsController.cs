@@ -48,7 +48,8 @@ namespace Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<GetDependentDto>>> UpdateDependent(int id, UpdateDependentDto updatedDependent)
         {
-            var dependent = _dependentService.UpdateDependent(id, updatedDependent);
+            _dependentService.UpdateDependent(id, updatedDependent);
+            var dependent = _dependentService.GetDependent(id);
             return Ok(dependent);
         }
 

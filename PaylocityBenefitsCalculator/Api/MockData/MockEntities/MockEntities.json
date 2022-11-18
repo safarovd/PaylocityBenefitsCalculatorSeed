@@ -1,50 +1,115 @@
 {
   "Employees": [
     {
-      "Id": 0,
-      "FirstName": "string 1",
-      "LastName": "string",
-      "Salary": 0,
+      "Id": 2,
+      "FirstName": "Daniel",
+      "LastName": "Safarov",
+      "Salary": 10000001,
       "DateOfBirth": "string",
-      "Dependents": [
-        {
-          "Id": 0,
-          "FirstName": "string",
-          "LastName": "string",
-          "DateOfBirth": "string",
-          "Relationship": "None",
-          "EmployeeId": 0,
-          "Employee": null
-        }
-      ],
+      "Dependents": [],
       "HasPartner": false
     },
     {
-      "Id": 1,
-      "FirstName": "string 2",
-      "LastName": "string",
-      "Salary": 0,
-      "DateOfBirth": "string",
+      "Id": 3,
+      "FirstName": "Jay",
+      "LastName": "Chr",
+      "Salary": 123412,
+      "DateOfBirth": "1997-7-20",
       "Dependents": [
         {
           "Id": 1,
-          "FirstName": "name",
-          "LastName": "yes",
-          "DateOfBirth": "wasasa",
-          "Relationship": "Spouse",
-          "EmployeeId": 1,
+          "FirstName": "Cas",
+          "LastName": "Chr",
+          "DateOfBirth": "2015-5-17",
+          "Relationship": "Child",
+          "EmployeeId": 3,
+          "Employee": null
+        },
+        {
+          "Id": 2,
+          "FirstName": "Ras",
+          "LastName": "Chr",
+          "DateOfBirth": "2015-5-17",
+          "Relationship": "Child",
+          "EmployeeId": 3,
           "Employee": null
         }
       ],
       "HasPartner": false
     },
     {
-      "Id": 2,
-      "FirstName": "string 3",
+      "Id": 4,
+      "FirstName": "Jay",
+      "LastName": "Chr",
+      "Salary": 100001,
+      "DateOfBirth": "1997-7-20",
+      "Dependents": [
+        {
+          "Id": 4,
+          "FirstName": "Ras",
+          "LastName": "Chr",
+          "DateOfBirth": "2015-5-17",
+          "Relationship": "Child",
+          "EmployeeId": 4,
+          "Employee": null
+        },
+        {
+          "Id": 5,
+          "FirstName": "Has",
+          "LastName": "Chr",
+          "DateOfBirth": "2015-5-17",
+          "Relationship": "Child",
+          "EmployeeId": 4,
+          "Employee": null
+        }
+      ],
+      "HasPartner": false
+    },
+    {
+      "Id": 5,
+      "FirstName": "string",
       "LastName": "string",
       "Salary": 0,
       "DateOfBirth": "string",
       "Dependents": [],
+      "HasPartner": false
+    },
+    {
+      "Id": 6,
+      "FirstName": "string",
+      "LastName": "string",
+      "Salary": 0,
+      "DateOfBirth": "string",
+      "Dependents": [
+        {
+          "Id": 7,
+          "FirstName": "2",
+          "LastName": "3",
+          "DateOfBirth": "123-456-5687",
+          "Relationship": "Child",
+          "EmployeeId": 6,
+          "Employee": null
+        }
+      ],
+      "HasPartner": false
+    },
+    {
+      "Id": 7,
+      "FirstName": "string",
+      "LastName": "string",
+      "Salary": 0,
+      "DateOfBirth": "string",
+      "Dependents": [
+        {
+          "Id": 8,
+          "FirstName": "string",
+          "LastName": "string",
+          "DateOfBirth": "string",
+          "Relationship": "None",
+          "EmployeeId": 7,
+          "Employee": null
+        }
+      ],
       "HasPartner": false
     }
   ]
