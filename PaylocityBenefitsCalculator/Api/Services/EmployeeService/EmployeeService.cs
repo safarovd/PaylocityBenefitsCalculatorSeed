@@ -1,9 +1,9 @@
-﻿using Api.BenefitsServices.BenefitsHelper;
-using Api.BenefitsServices.MockDataBaseService;
+﻿using Api.Services.BenefitsHelper;
+using Api.Repositories.MockDataBaseService;
 using Api.Dtos.Employee;
 using Api.Models;
 
-namespace Api.BenefitsServices
+namespace Api.Services
 {
     public class EmployeeService : BenefitsService, IEmployeeService
     {

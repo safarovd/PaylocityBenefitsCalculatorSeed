@@ -1,6 +1,6 @@
-using Api.BenefitsServices;
-using Api.BenefitsServices.DependentService;
-using Api.BenefitsServices.MockDataBaseService;
+using Api.Services;
+using Api.Services.DependentService;
+using Api.Repositories.MockDataBaseService;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);

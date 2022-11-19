@@ -1,8 +1,6 @@
-﻿using Api.BenefitsServices;
-using Api.Dtos.Employee;
-using Api.Models;
+﻿using Api.Dtos.Employee;
 
-namespace Api.BenefitsServices
+namespace Api.Services
 {
     public interface IEmployeeService : IBenefitsService
     {

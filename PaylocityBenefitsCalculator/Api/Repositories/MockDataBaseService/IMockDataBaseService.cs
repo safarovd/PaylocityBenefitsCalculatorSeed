@@ -2,7 +2,7 @@
 using Api.Dtos.Dependent;
 using Api.Models;
 
-namespace Api.BenefitsServices.MockDataBaseService
+namespace Api.Repositories.MockDataBaseService
 {
     public interface IMockDataBaseService
     {

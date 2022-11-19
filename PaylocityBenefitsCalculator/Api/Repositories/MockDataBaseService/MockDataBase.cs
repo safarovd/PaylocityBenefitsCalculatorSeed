@@ -1,9 +1,9 @@
-﻿using Api.BenefitsServices.BenefitsHelper;
+﻿using Api.Services.BenefitsHelper;
 using Api.Dtos.Employee;
 using Api.Dtos.Dependent;
 using Api.Models;
 
-namespace Api.BenefitsServices.MockDataBaseService
+namespace Api.Repositories.MockDataBaseService
 {
     public class MockDataBase : IMockDataBaseService
     {

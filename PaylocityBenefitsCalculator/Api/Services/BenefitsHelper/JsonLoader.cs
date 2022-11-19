@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Api.BenefitsServices.BenefitsHelper
+namespace Api.Services.BenefitsHelper
 {
     public class JsonLoader
     {   
