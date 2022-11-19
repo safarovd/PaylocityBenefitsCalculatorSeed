@@ -18,7 +18,7 @@ namespace Api.BenefitsServices.MockDataBaseService
         private Dictionary<int, Employee> _employeeCache = new Dictionary<int, Employee>();
         private Dictionary<int, Dependent> _dependentCache = new Dictionary<int, Dependent>();
         // path to data
-        protected string MockEntitiesPath = "BenefitsServices\\MockDataBaseService\\MockData\\MockEntities\\MockEntities.json";
+        protected string MockEntitiesPath = "Repositories\\MockDataBaseService\\MockData\\MockEntities\\MockEntities.json";
         public MockDataBase()
         {
             // Hook up and load in our Employee data
