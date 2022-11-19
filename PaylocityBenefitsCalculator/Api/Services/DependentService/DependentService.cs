@@ -1,4 +1,4 @@
-﻿using Api.Repositories.MockDataBaseService;
+﻿using Api.Repositories.MockDataBase;
 using Api.Dtos.Dependent;
 using Api.Models;
 
@@ -6,8 +6,8 @@ namespace Api.Services.DependentService
 {
     public class DependentService : BenefitsService, IDependentService
     {
-        IMockDataBaseService _repository;
-        public DependentService(IMockDataBaseService dependentRepository)
+        IMockDataBase _repository;
+        public DependentService(IMockDataBase dependentRepository)
         {
             // hook up our Database mock service
             // Reason: we do this so that if we ever decide to hook up a real database, not 

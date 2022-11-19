@@ -1,5 +1,5 @@
 ﻿using Api.Services.BenefitsHelper;
-using Api.Repositories.MockDataBaseService;
+using Api.Repositories.MockDataBase;
 using Api.Dtos.Employee;
 using Api.Models;
 
@@ -7,8 +7,8 @@ namespace Api.Services
 {
     public class EmployeeService : BenefitsService, IEmployeeService
     {
-        private IMockDataBaseService _repository;
-        public EmployeeService(IMockDataBaseService employeeRepository) 
+        private IMockDataBase _repository;
+        public EmployeeService(IMockDataBase employeeRepository) 
         { 
             // setup the database service to query for data
             _repository = employeeRepository;

@@ -2,9 +2,9 @@
 using Api.Dtos.Dependent;
 using Api.Models;
 
-namespace Api.Repositories.MockDataBaseService
+namespace Api.Repositories.MockDataBase
 {
-    public interface IMockDataBaseService
+    public interface IMockDataBase
     {
         public Employee QueryEmployeeById(int id);
         public List<Employee> QueryAllEmployees();

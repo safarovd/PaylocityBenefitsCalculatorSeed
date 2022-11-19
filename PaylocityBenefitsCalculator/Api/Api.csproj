@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <InternalsVisibleTo Include="ApiTests.PaylocityBenefitsCalculatorApiTests.EmployeesControllerTestSuite" />
+      <InternalsVisibleTo Include="$(AssemblyName).Test" />
     </ItemGroup>
 
 </Project>

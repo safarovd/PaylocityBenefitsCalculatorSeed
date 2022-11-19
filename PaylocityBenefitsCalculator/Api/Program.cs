@@ -1,14 +1,15 @@
 using Api.Services;
 using Api.Services.DependentService;
-using Api.Repositories.MockDataBaseService;
+using Api.Repositories.MockDataBase;
 using Microsoft.OpenApi.Models;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Register interfaces and classes for our services
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IDependentService, DependentService>();
-builder.Services.AddScoped<IMockDataBaseService, MockDataBase>();
+builder.Services.AddScoped<IMockDataBase, MockDataBase>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -43,7 +44,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(allowLocalhost);
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
