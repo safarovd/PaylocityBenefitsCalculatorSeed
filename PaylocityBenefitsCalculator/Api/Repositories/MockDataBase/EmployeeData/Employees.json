@@ -27,25 +27,6 @@
         }
       ],
       "HasPartner": true
-    },
-    {
-      "Id": 1,
-      "FirstName": "yayden",
-      "LastName": "christmas",
-      "Salary": 1000000,
-      "DateOfBirth": "07-20-1969",
-      "Dependents": [
-        {
-          "Id": 2,
-          "FirstName": "Daniel",
-          "LastName": "Safarov",
-          "DateOfBirth": "1807-09-09",
-          "Relationship": "Child",
-          "EmployeeId": 1,
-          "Employee": null
-        }
-      ],
-      "HasPartner": false
     }
   ]
 }
