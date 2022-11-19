@@ -1,6 +1,6 @@
 ﻿using Api.Dtos.Dependent;
 
-namespace Api.BenefitsServices.DependentService
+namespace Api.Services.DependentService
 {
     public interface IDependentService
     {

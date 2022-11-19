@@ -1,10 +1,9 @@
-﻿using Api.BenefitsServices.BenefitsHelper;
-using Api.Dtos.Dependent;
+﻿using Api.Dtos.Dependent;
 using Api.Dtos.Employee;
 using Api.Models;
 using AutoMapper;
 
-namespace Api.BenefitsServices
+namespace Api.Services
 {
     public class BenefitsService : IBenefitsService
     {

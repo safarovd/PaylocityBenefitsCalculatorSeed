@@ -3,7 +3,7 @@ using Api.Dtos.Employee;
 using Api.Models;
 using System.Globalization;
 
-namespace Api.BenefitsServices.BenefitsHelper
+namespace Api.Services.BenefitsHelper
 {
     public static class PaycheckCalculator
     {

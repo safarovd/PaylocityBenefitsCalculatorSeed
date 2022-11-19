@@ -1,4 +1,4 @@
-﻿using Api.BenefitsServices;
+﻿using Api.Services;
 using Api.Dtos.Employee;
 using Api.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +33,7 @@ namespace Api.Controllers
             return Ok(allEmployeesDto);
         }
 
-        [SwaggerOperation(Summary = "Get Employee Monthly Paycheck")]
+        [SwaggerOperation(Summary = "Get Employee Paycheck")]
         [HttpGet("{id}/Paycheck")]
         public async Task<ActionResult<decimal>> GetEmployeePaycheck(int id)
         {

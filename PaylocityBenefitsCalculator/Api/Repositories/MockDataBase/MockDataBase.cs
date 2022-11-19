@@ -1,11 +1,11 @@
-﻿using Api.BenefitsServices.BenefitsHelper;
+﻿using Api.Services.BenefitsHelper;
 using Api.Dtos.Employee;
 using Api.Dtos.Dependent;
 using Api.Models;
 
-namespace Api.BenefitsServices.MockDataBaseService
+namespace Api.Repositories.MockDataBase
 {
-    public class MockDataBase : IMockDataBaseService
+    public class MockDataBase : IMockDataBase
     {
         // hidden from the user, this will act as our table
         private AllEntities _data;
@@ -18,7 +18,7 @@ namespace Api.BenefitsServices.MockDataBaseService
         private Dictionary<int, Employee> _employeeCache = new Dictionary<int, Employee>();
         private Dictionary<int, Dependent> _dependentCache = new Dictionary<int, Dependent>();
         // path to data
-        protected string MockEntitiesPath = "BenefitsServices\\MockDataBaseService\\MockData\\MockEntities\\MockEntities.json";
+        protected string MockEntitiesPath = "Repositories\\MockDataBase\\EmployeeData\\Employees.json";
         public MockDataBase()
         {
             // Hook up and load in our Employee data

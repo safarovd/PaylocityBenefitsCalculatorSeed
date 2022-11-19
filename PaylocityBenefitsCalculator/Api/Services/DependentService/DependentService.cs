@@ -1,25 +1,25 @@
-﻿using Api.BenefitsServices.MockDataBaseService;
+﻿using Api.Repositories.MockDataBase;
 using Api.Dtos.Dependent;
 using Api.Models;
 
-namespace Api.BenefitsServices.DependentService
+namespace Api.Services.DependentService
 {
     public class DependentService : BenefitsService, IDependentService
     {
-        IMockDataBaseService _databaseService;
-        public DependentService(IMockDataBaseService databaseService)
+        IMockDataBase _repository;
+        public DependentService(IMockDataBase dependentRepository)
         {
             // hook up our Database mock service
             // Reason: we do this so that if we ever decide to hook up a real database, not 
             // much refactoring will be needed.
-            _databaseService = databaseService;
+            _repository = dependentRepository;
 
         }
         public List<GetDependentDto> GetAllDependents()
         {
             // create a list of GetDependentDtos
             var dependentsDtos = new List<GetDependentDto>();
-            var dependents = _databaseService.QueryAllDependents();
+            var dependents = _repository.QueryAllDependents();
             foreach (Dependent dep in dependents)
             {
                 // map Dependent to GetDependentDto
@@ -31,7 +31,7 @@ namespace Api.BenefitsServices.DependentService
 
         public GetDependentDto GetDependent(int id)
         {
-            var dependent = _databaseService.QueryDependentById(id);
+            var dependent = _repository.QueryDependentById(id);
             var getdependentDto = Mapper.Map<GetDependentDto>(dependent);
             return getdependentDto;
         }
@@ -40,20 +40,20 @@ namespace Api.BenefitsServices.DependentService
         {
             // get the updated Dto and return
             var getDependentDto = GetDependent(id);
-            _databaseService.UpdateDependent(id, update);
+            _repository.UpdateDependent(id, update);
             return getDependentDto;
         }
         public AddDependentWithEmployeeIdDto AddDependent(AddDependentWithEmployeeIdDto newDependent)
         {
             var dependent = Mapper.Map<Dependent>(newDependent);
-            _databaseService.InsertDependent(dependent);
+            _repository.InsertDependent(dependent);
             return newDependent;
         }
 
         public GetDependentDto DeleteDependent(int id)
         {
             var dependentDto = GetDependent(id);
-            _databaseService.DeleteDependent(id);
+            _repository.DeleteDependent(id);
             return dependentDto;
         }
     }
