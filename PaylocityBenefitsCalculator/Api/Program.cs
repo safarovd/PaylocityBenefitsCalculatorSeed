@@ -44,7 +44,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(allowLocalhost);
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
