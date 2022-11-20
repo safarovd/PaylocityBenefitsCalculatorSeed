@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Api.Controllers.DependentsController" Collapsed="true">
+    <Position X="3.75" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAQIAAAAIBAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Controllers\DependentsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_dependentService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Api.Controllers.EmployeesController" Collapsed="true">
+    <Position X="1" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIAEAAAAIAABBAAAAAAAAAAAAAAAAIAgAAAAAAAAA=</HashCode>
+      <FileName>Controllers\EmployeesController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_employeeService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Api.Dtos.Dependent.AddDependentDto" Collapsed="true">
+    <Position X="11.25" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAg=</HashCode>
+      <FileName>Dtos\Dependent\AddDependentDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Dtos.Dependent.AddDependentWithEmployeeIdDto" Collapsed="true">
+    <Position X="11.25" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Dtos\Dependent\AddDependentWithEmployeeIdDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Dtos.Dependent.GetDependentDto" Collapsed="true">
+    <Position X="15.75" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAg=</HashCode>
+      <FileName>Dtos\Dependent\GetDependentDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Dtos.Dependent.UpdateDependentDto" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAg=</HashCode>
+      <FileName>Dtos\Dependent\UpdateDependentDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Dtos.Employee.AddEmployeeDto" Collapsed="true">
+    <Position X="11.25" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAGAAAAAAAAAAAAAAAAAAAAAQAAAAAAAEAAAAAAg=</HashCode>
+      <FileName>Dtos\Employee\AddEmployeeDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Dtos.Employee.GetEmployeeDto" Collapsed="true">
+    <Position X="11.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAGAAAAAAAAAAAAAAAAAAAAAQAAAAAAAEAAAAAAg=</HashCode>
+      <FileName>Dtos\Employee\GetEmployeeDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Dtos.Employee.UpdateEmployeeDto" Collapsed="true">
+    <Position X="13.5" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Dtos\Employee\UpdateEmployeeDto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Models.AllEntities">
+    <Position X="7.25" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AllEntities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Models.ApiResponse&lt;T&gt;" Collapsed="true">
+    <Position X="13.5" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAgAAABAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\ApiResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Models.Dependent" Collapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAAACAAQAAAAAAABAAACAAg=</HashCode>
+      <FileName>Models\Dependent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Relationship" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Api.Models.Employee" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACCGBAAAAAAAAAAAAAAAAAAAAQAAAAAAAEAAAAAAg=</HashCode>
+      <FileName>Models\Employee.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dependents" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Api.Repositories.MockDataBase.MockDataBase" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABJAJACIAKEAABBwAAgCEAAAAIAAABAAABAQA=</HashCode>
+      <FileName>Repositories\MockDataBase\MockDataBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_data" />
+      <Field Name="JsonLoader" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Api.Services.BenefitsHelper.JsonLoader" Collapsed="true">
+    <Position X="9.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\BenefitsHelper\JsonLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Services.BenefitsHelper.PaycheckCalculator" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAABBEAIAAAAAEAAAAAAAAoAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\BenefitsHelper\PaycheckCalculator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Api.Services.DependentService.DependentService" Collapsed="true">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQIABAAIAAAAAAgAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Services\DependentService\DependentService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_repository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Api.Services.EmployeeService" Collapsed="true">
+    <Position X="6" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAEAAAAJAgAAAAAAAAEAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Services\EmployeeService\EmployeeService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_repository" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Api.Services.BenefitsService" Collapsed="true">
+    <Position X="7.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\BenefitsService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Program" Collapsed="true">
+    <Position X="15.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Api.Repositories.MockDataBase.IMockDataBase" Collapsed="true">
+    <Position X="7.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAJAAIAKAAAABAAAAAEAAAAIAAAAAAABAAA=</HashCode>
+      <FileName>Repositories\MockDataBase\IMockDataBase.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Api.Services.DependentService.IDependentService" Collapsed="true">
+    <Position X="3.75" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQIAAAAIAAAAAAgAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Services\DependentService\IDependentService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Api.Services.IEmployeeService" Collapsed="true">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAEAAAAIAgAAAAAAAAEAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Services\EmployeeService\IEmployeeService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Api.Services.IBenefitsService" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IBenefitsService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="System.Collections.Generic.ICollection&lt;T&gt;" Collapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Enum Name="Api.Models.Relationship" Collapsed="true">
+    <Position X="15" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAIAACAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Models\Relationship.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

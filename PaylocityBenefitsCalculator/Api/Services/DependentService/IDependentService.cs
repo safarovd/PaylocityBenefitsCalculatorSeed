@@ -2,7 +2,7 @@
 
 namespace Api.Services.DependentService
 {
-    public interface IDependentService
+    public interface IDependentService : IBenefitsService
     {
         List<GetDependentDto> GetAllDependents();
         GetDependentDto? GetDependent(int id);
