@@ -23,3 +23,13 @@ problem. We’re looking to see your skills in all three tiers so the solution c
 to show our teams your abilities across the board.
 
 Requirements will be given separately.
+
+# Interviewee Notes:
+
+This application should work out of the box. A few 3rd party packages were installed, but they are well known 
+and supported so I doubt they'll cause any issues. For reference here is a simple UML Diagram of the backend 
+code: 
+
+![image](https://user-images.githubusercontent.com/32182031/203123378-4578ec23-f04c-4b9f-a399-72d6d89e094c.png)
+
+Please let me know if you have any questions.
