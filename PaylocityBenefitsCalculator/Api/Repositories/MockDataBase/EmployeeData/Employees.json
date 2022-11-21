@@ -18,10 +18,10 @@
         },
         {
           "Id": 1,
-          "FirstName": "Minhister",
+          "FirstName": "Minh",
           "LastName": "Nguyen",
-          "DateOfBirth": "1950-2-13",
-          "Relationship": "DomesticPartner",
+          "DateOfBirth": "1988-1-11",
+          "Relationship": "Child",
           "EmployeeId": 0,
           "Employee": null
         }

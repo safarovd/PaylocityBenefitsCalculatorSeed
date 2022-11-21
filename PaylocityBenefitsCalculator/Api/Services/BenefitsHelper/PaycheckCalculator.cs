@@ -5,6 +5,27 @@ using System.Globalization;
 
 namespace Api.Services.BenefitsHelper
 {
+    // Reason:
+    // I did the paycheck calculations on the backend because the front end would not 
+    // build and run for me. It seemed like npm was referencing Paylocity servers. I decided to focus 
+    // on the backend while awaiting responses on the issue from Paylocity devs. Due to dev vacation times
+    // and my personal work/life responsibilities, I only had enough time to meet this requirement by coding here.
+    // However, I would have done the below implementations on the client side for a couple of reasons.
+    // If caclulations are done on the front end then the user gets instant response which is always good
+    // user experience. Additionally, doing the calculations on the front end reduces loads on our servers
+    // and being that math isn't too heavy for client side computation, it just seems like a more practical
+    // approach to calculate employee paychecks on the front end.
+
+    // HOWEVER! If we needed the paycheck calculations for more than just the UI (for example, we need to 
+    // also generate documentation using those numbers and perhaps pass that value to some payment service)
+    // then we should NOT trust the client and instead do the work on the backend. That way we have a secure
+    // source of truth that can be passed around fairly efficiently to any service we need to. Additionally (a side thought), 
+    // if there are frequent benefit calculation updates/changes I think we can benefit from OOP techniques to help
+    // us abstract out types of calculations for types of employees, etc. etc.
+    // i.e. HR has x deductions
+    //      Devs have y deductions
+    //      Temps have z deductions
+    // but this could probably be done on the front end as well....all depends on use case and business requirements I guess.
     public static class PaycheckCalculator
     {
         public static decimal CalculatePaycheck(GetEmployeeDto getEmployeeDto)
