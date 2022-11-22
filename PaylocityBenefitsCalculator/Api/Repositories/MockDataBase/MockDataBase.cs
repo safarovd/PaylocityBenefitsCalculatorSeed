@@ -8,13 +8,14 @@ namespace Api.Repositories.MockDataBase
     public class MockDataBase : IMockDataBase
     {
         // hidden from the user, this will act as our table
+        // look at NOT below...
         private AllEntities _data;
-        // reads/writes to our fake table
-        protected JsonLoader JsonLoader;
         // counters for entity Id's
         protected static int _numEmployees;
         protected static int _numDependents;
-        // caching for our queried entities, speeding up our query process
+        // caching for our queried entities, speeding up our query process. In a real system we would have
+        // a real database and write optimal queries for fetching data. (I.e. Index by Employee Id for faster access by employee id)
+        // NOTE: In hindsight I could have loaded all data in to the hashmap and use that
         private Dictionary<int, Employee> _employeeCache = new Dictionary<int, Employee>();
         private Dictionary<int, Dependent> _dependentCache = new Dictionary<int, Dependent>();
         // path to data
@@ -22,7 +23,6 @@ namespace Api.Repositories.MockDataBase
         public MockDataBase()
         {
             // Hook up and load in our Employee data
-            JsonLoader = new JsonLoader();
             _data = JsonLoader.LoadJson<AllEntities>(MockEntitiesPath);
             // initialize our session counters
             _numEmployees = _data.Employees.Count == 0 ? 0 : _data.Employees.Last().Id + 1;
@@ -49,8 +49,8 @@ namespace Api.Repositories.MockDataBase
             foreach (Employee employee in _data.Employees)
             {
                 dependents.AddRange(employee.Dependents);
-                CacheData();
             }
+            CacheData();
             return dependents;
         }
 
@@ -98,7 +98,7 @@ namespace Api.Repositories.MockDataBase
             {
                 CacheData();
                 var employee = _data.Employees.Where(emp => emp.Id == id).FirstOrDefault();
-                if (employee == null) throw new InvalidOperationException($"Employee {id} doesn't exist.");
+                if (employee == null) throw new KeyNotFoundException($"Employee {id} doesn't exist.");
                 return employee;
             }
             return null;
@@ -130,7 +130,7 @@ namespace Api.Repositories.MockDataBase
         public void UpdateEmployee(int id, UpdateEmployeeDto updatedEmployee)
         {
             var employee = QueryEmployeeById(id);
-            if (employee == null) throw new InvalidOperationException($"Employee {id} doesn't exist.");
+            if (employee == null) throw new KeyNotFoundException($"Employee {id} doesn't exist.");
             // update the values
             employee.FirstName = updatedEmployee.FirstName;
             employee.LastName = updatedEmployee.LastName;
@@ -143,7 +143,7 @@ namespace Api.Repositories.MockDataBase
         public void DeleteEmployee(int id)
         {
             var employee = QueryEmployeeById(id);
-            if (!_employeeCache.ContainsKey(id) || employee == null) throw new InvalidOperationException($"Employee {id} doesn't exist.");
+            if (!_employeeCache.ContainsKey(id) || employee == null) throw new KeyNotFoundException($"Employee {id} doesn't exist.");
             foreach (Dependent dep in employee.Dependents)
             {
                 if (_dependentCache.ContainsKey(dep.Id))
@@ -176,7 +176,7 @@ namespace Api.Repositories.MockDataBase
         public void UpdateDependent(int id, UpdateDependentDto update)
         {
             var dependent = QueryDependentById(id);
-            if (dependent == null) throw new InvalidOperationException($"Dependent {id} doesn't exist.");
+            if (dependent == null) throw new KeyNotFoundException($"Dependent {id} doesn't exist.");
             // update the values
             dependent.FirstName = update.FirstName;
             dependent.LastName = update.LastName;
@@ -189,9 +189,9 @@ namespace Api.Repositories.MockDataBase
         public void DeleteDependent(int id)
         {
             var dependent = QueryDependentById(id);
-            if (!_dependentCache.ContainsKey(id) || dependent == null) throw new InvalidOperationException($"Dependent {id} doesn't exist, cannot remove dependent.");
+            if (!_dependentCache.ContainsKey(id) || dependent == null) throw new KeyNotFoundException($"Dependent {id} doesn't exist, cannot remove dependent.");
             var employee = QueryEmployeeById(dependent.EmployeeId);
-            if (!_employeeCache.ContainsKey(dependent.EmployeeId) || employee == null) throw new InvalidOperationException($"Employee {id} doesn't exist, cannot remove dependent.");
+            if (!_employeeCache.ContainsKey(dependent.EmployeeId) || employee == null) throw new KeyNotFoundException($"Employee {id} doesn't exist, cannot remove dependent.");
             _dependentCache.Remove(id);
             employee.Dependents.Remove(dependent);
             // write our updated data to our mock storage

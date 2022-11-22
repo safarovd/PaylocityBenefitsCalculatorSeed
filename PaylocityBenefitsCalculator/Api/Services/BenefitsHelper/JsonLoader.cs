@@ -6,7 +6,7 @@ namespace Api.Services.BenefitsHelper
     public class JsonLoader
     {   
         // Make the JsonLoader generic so that we can load json into any class type.
-        public T LoadJson<T>(string fileName)
+        public static T LoadJson<T>(string fileName)
         {
             var options = new JsonSerializerOptions
             {
@@ -22,14 +22,13 @@ namespace Api.Services.BenefitsHelper
             return item;
         }
 
-        public T WriteJson<T>(T data, string fileName)
+        public static void WriteJson<T>(T data, string fileName)
         {
             // prettify the json string
             var options = new JsonSerializerOptions { WriteIndented = true };
             string json = JsonSerializer.Serialize<T>(data, options);
             // write updated data to our Json file
             File.WriteAllText(fileName, json);
-            return data;
         }
     }
 }

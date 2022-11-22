@@ -22,10 +22,12 @@ namespace Api.Services.BenefitsHelper
     // source of truth that can be passed around fairly efficiently to any service we need to. Additionally (a side thought), 
     // if there are frequent benefit calculation updates/changes I think we can benefit from OOP techniques to help
     // us abstract out types of calculations for types of employees, etc. etc.
+    // Especially useful for different countries or states (i.e. taxes)
     // i.e. HR has x deductions
     //      Devs have y deductions
     //      Temps have z deductions
     // but this could probably be done on the front end as well....all depends on use case and business requirements I guess.
+    // 
     public static class PaycheckCalculator
     {
         public static decimal CalculatePaycheck(GetEmployeeDto getEmployeeDto)
@@ -38,13 +40,13 @@ namespace Api.Services.BenefitsHelper
             monthlySalary = BaseFee(monthlySalary);
             // every dependent costs $600 per month for benefits
             monthlySalary = DependentFee(monthlySalary, getEmployeeDto);
-            // if employye is 50 years or older, deduct $200 per month
+            // if a dependent is 50 years or older, deduct $200 per month
             monthlySalary = OldAgeFee(getEmployeeDto, monthlySalary);
             // convert monthly to actual paycheck
             var paycheck = ConvertToPaycheck(monthlySalary);
             if (paycheck < 0) throw new InvalidOperationException($"Employee {getEmployeeDto.Id} earns peanuts, pay more.");
             // round to 2 decimal places
-            return decimal.Round(paycheck, 2, MidpointRounding.AwayFromZero); ;
+            return decimal.Round(paycheck, 2, MidpointRounding.AwayFromZero);
         }
         private static decimal ConvertSalaryToMonthly(decimal salary)
         {

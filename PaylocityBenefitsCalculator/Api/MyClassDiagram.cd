@@ -21,14 +21,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Api.Dtos.Dependent.AddDependentDto" Collapsed="true">
-    <Position X="11.25" Y="5.5" Width="2" />
+    <Position X="15.75" Y="3.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAg=</HashCode>
       <FileName>Dtos\Dependent\AddDependentDto.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Api.Dtos.Dependent.AddDependentWithEmployeeIdDto" Collapsed="true">
-    <Position X="11.25" Y="6.75" Width="2" />
+    <Position X="15.75" Y="4.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>Dtos\Dependent\AddDependentWithEmployeeIdDto.cs</FileName>
@@ -160,7 +160,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Program" Collapsed="true">
-    <Position X="15.75" Y="3.5" Width="2" />
+    <Position X="0.75" Y="5.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
